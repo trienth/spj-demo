@@ -2,5 +2,24 @@ server:
   port: 8777
 
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     open-in-view: false
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+          highlight_sql: true
+logging:
+  level:
+    root: INFO
+#    org.springframework: DEBUG  # Set DEBUG for Spring components
+    org.hibernate.SQL: DEBUG  # Log SQL queries
+    org.hibernate.orm.jdbc.bind: TRACE  # Log SQL parameters
+
