@@ -4,6 +4,8 @@ import com.tbb.spj.dto.InternalTransactionDto;
 import com.tbb.spj.dto.InternalTransactionView;
 import com.tbb.spj.entities.InternalTransaction;
 import com.tbb.spj.repositories.InternalTransactionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,5 +35,10 @@ public class InternalTransactionServiceImpl implements InternalTransactionServic
     @Override
     public List<InternalTransactionDto> getPendingTxns(String status) {
         return repository.findPendingTransaction(status);
+    }
+
+    @Override
+    public Page<InternalTransactionDto> findAllPendingTransaction(String status, Pageable pageable){
+        return repository.findAllPendingTransaction(status, pageable);
     }
 }

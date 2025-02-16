@@ -4,6 +4,11 @@ import com.tbb.spj.dto.InternalTransactionDto;
 import com.tbb.spj.dto.InternalTransactionView;
 import com.tbb.spj.entities.InternalTransaction;
 import com.tbb.spj.service.InternalTransactionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,5 +40,15 @@ public class InternalTransactionController {
     @GetMapping("/dto-projection")
     public List<InternalTransactionDto> getPendingTxns() {
         return service.getPendingTxns("PENDING");
+    }
+
+    @GetMapping("/pending")
+    public ResponseEntity<Page<InternalTransactionDto>> getPendingTransactions(
+            @RequestParam String status,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.desc("transactionId")));
+        Page<InternalTransactionDto> result = service.findAllPendingTransaction(status, pageable);
+        return ResponseEntity.ok(result);
     }
 }
