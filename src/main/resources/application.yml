@@ -3,4 +3,18 @@ server:
 
 spring:
   jpa:
+    hibernate:
+      ddl-auto: update # Or create, create-drop, none
+    show-sql: true # Optional: Shows SQL queries
     open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect # Recommended
+      org.hibernate.envers.audit_table_suffix: _audit
+      org.hibernate.envers.revision_field_name: rev_id
+      org.hibernate.envers.revision_type_field_name: rev_type
+  datasource:
+    url: jdbc:postgresql://localhost:5432/paylink
+    username: paylink
+    password: postgres
+    driver-class-name: org.postgresql.Driver

@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "1367367c-fc4c-4eb8-b151-c7d5cc1fa2ef",
+		"name": "Demo - SpringBoot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "457965"
+	},
+	"item": [
+		{
+			"name": "00 Setup",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"    pm.environment.set(\"demoUrl\", \"http://localhost:8777\"); // {{demoUrl}}",
+							"    "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "postman-echo.com/get",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Product\",\n    \"price\": 99.99,\n    \"quantity\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{demoUrl}}/api/products",
+					"host": [
+						"{{demoUrl}}"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST 'http://localhost:8080/api/products' \\\n-H 'Content-Type: application/json' \\\n-d '{\n    \"name\": \"Test Product\",\n    \"price\": 99.99,\n    \"quantity\": 100\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Updated Product Name\",\n    \"price\": 149.99,\n    \"quantity\": {{$randomInt}}\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{demoUrl}}/api/products/1",
+					"host": [
+						"{{demoUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST 'http://localhost:8080/api/products' \\\n-H 'Content-Type: application/json' \\\n-d '{\n    \"name\": \"Test Product\",\n    \"price\": 99.99,\n    \"quantity\": 100\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{demoUrl}}/api/products/1/history",
+					"host": [
+						"{{demoUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"history"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET 'http://localhost:8080/api/products/{id}/history' \\\n-H 'Accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get revision",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{demoUrl}}/api/products/:id/revision/:revisionNo",
+					"host": [
+						"{{demoUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						":id",
+						"revision",
+						":revisionNo"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "revisionNo",
+							"value": "3"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET 'http://localhost:8080/api/products/{id}/history' \\\n-H 'Accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get revision last",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{demoUrl}}/api/products/1/revision/2",
+					"host": [
+						"{{demoUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"revision",
+						"2"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET 'http://localhost:8080/api/products/{id}/history' \\\n-H 'Accept: application/json'"
+			},
+			"response": []
+		}
+	]
+}
